@@ -93,52 +93,35 @@ const firebaseConfig = {
         db.collection("donations").add(newDonation);
       },
 
-      payWithUPI() {
+      function payWithUPI() {
     const amountInput = document.getElementById('donation-amount');
     const noteInput = document.getElementById('donation-note');
 
     const amount = parseFloat(amountInput.value);
     const note = noteInput.value || 'Vinayaka Chaturthi Donation';
 
-    // Validate amount
     if (!amount || amount <= 0) {
-        ui.showPaymentStatus('Please enter a valid amount', 'error');
+        alert('Please enter a valid amount');
         return;
     }
 
-    // Correct UPI ID (no hyphen allowed)
-    const upiId = '7993962018@ybl';
+    // Correct UPI ID (change this to your real one)
+    const upiId = '7993962018@ybl';  
     const merchantName = 'Kings Youth';
 
-    // Create UPI payment link
+    // Generate UPI link
     const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
 
-    // Detect mobile
-    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-
-    if (isMobile) {
-        // Open UPI link in mobile UPI apps
-        window.location.href = upiLink; // use location.href for better deep linking
-        ui.showPaymentStatus('Redirecting to UPI app...', 'success');
-
-        // Simulated history entry (real payment confirmation requires backend)
-        setTimeout(() => {
-            this.addRecord(amount, 'Anonymous', note);
-        }, 3000);
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        window.location.href = upiLink; // Direct open
     } else {
-        // Show QR code for desktop users
-        ui.showPaymentStatus('UPI works best on mobile. Scan the QR code below.', 'info');
-        generateQRCode(upiLink);
+        alert('UPI payments work best on mobile. Please scan the QR code.');
     }
 
-    // Clear form
-    setTimeout(() => {
-        amountInput.value = '';
-        noteInput.value = '';
-        donation.addRecord(amount, 'User', note);
-    }, 3000);
-
-        }  
+    amountInput.value = '';
+    noteInput.value = '';
+}
+  
       };
 
 
