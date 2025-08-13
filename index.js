@@ -106,7 +106,7 @@ const firebaseConfig = {
             return;
         }
         
-        const upiId = '7993962018-2@ybl';
+        const upiId = '7993962018@ybl';
         const merchantName = 'Kings Youth';
         
         // Create UPI payment link
