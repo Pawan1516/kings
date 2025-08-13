@@ -135,8 +135,8 @@ const firebaseConfig = {
         setTimeout(() => {
             amountInput.value = '';
             noteInput.value = '';
-            document.getElementById('payment-status').classList.add('hidden');
-        }, 5000);
+            donation.addRecord(amount, 'User', note); // Removed auth.isAdmin check
+          }, 3000);
       }
     };
 
