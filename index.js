@@ -94,51 +94,53 @@ const firebaseConfig = {
       },
 
       payWithUPI() {
-        const amountInput = document.getElementById('donation-amount');
-        const noteInput = document.getElementById('donation-note');
+    const amountInput = document.getElementById('donation-amount');
+    const noteInput = document.getElementById('donation-note');
 
-        const amount = parseFloat(amountInput.value);
-        const note = noteInput.value || 'Vinayaka Chaturthi Donation';
+    const amount = parseFloat(amountInput.value);
+    const note = noteInput.value || 'Vinayaka Chaturthi Donation';
 
-        // Validation
-        if (!amount || amount <= 0) {
-            ui.showPaymentStatus('Please enter a valid amount', 'error');
-            return;
-        }
-        
-        const upiId = '7993962018@ybl';
-        const merchantName = 'Kings Youth';
-        
-        // Create UPI payment link
-        const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
-        
-        // Check if device is mobile
-        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        
-        if (isMobile) {
-            // Mobile device - open UPI app
-            window.open(upiLink, '_blank');
-            ui.showPaymentStatus('Redirecting to UPI app...', 'success');
-            
-            // Add to donation history (in real app, this would happen after successful payment)
-            setTimeout(() => {
-                this.addRecord(amount, 'Anonymous', note);
-            }, 3000);
-            
-        } else {
-            // Desktop - show message
-            ui.showPaymentStatus('UPI payments work best on mobile devices. Please scan the QR code below or use a mobile device.', 'info');
-            generateQRCode(upiLink);
-        }
-        
-        // Clear form after 3 seconds
+    // Validate amount
+    if (!amount || amount <= 0) {
+        ui.showPaymentStatus('Please enter a valid amount', 'error');
+        return;
+    }
+
+    // Correct UPI ID (no hyphen allowed)
+    const upiId = '7993962018@ybl';
+    const merchantName = 'Kings Youth';
+
+    // Create UPI payment link
+    const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
+
+    // Detect mobile
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        // Open UPI link in mobile UPI apps
+        window.location.href = upiLink; // use location.href for better deep linking
+        ui.showPaymentStatus('Redirecting to UPI app...', 'success');
+
+        // Simulated history entry (real payment confirmation requires backend)
         setTimeout(() => {
-            amountInput.value = '';
-            noteInput.value = '';
-            donation.addRecord(amount, 'User', note); // Removed auth.isAdmin check
-          }, 3000);
-      }
-    };
+            this.addRecord(amount, 'Anonymous', note);
+        }, 3000);
+    } else {
+        // Show QR code for desktop users
+        ui.showPaymentStatus('UPI works best on mobile. Scan the QR code below.', 'info');
+        generateQRCode(upiLink);
+    }
+
+    // Clear form
+    setTimeout(() => {
+        amountInput.value = '';
+        noteInput.value = '';
+        donation.addRecord(amount, 'User', note);
+    }, 3000);
+
+        }  
+      };
+
 
     const pooja = {
       listEl: document.getElementById("pooja-schedule-list"),
