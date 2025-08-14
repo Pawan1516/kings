@@ -93,34 +93,32 @@ const firebaseConfig = {
         db.collection("donations").add(newDonation);
       },
 
-      function payWithUPI() {
-    const amountInput = document.getElementById('donation-amount');
-    const noteInput = document.getElementById('donation-note');
+      payWithUPI() {
+        const amountInput = document.getElementById('donation-amount');
+        const noteInput = document.getElementById('donation-note');
 
-    const amount = parseFloat(amountInput.value);
-    const note = noteInput.value || 'Vinayaka Chaturthi Donation';
+        const amount = parseFloat(amountInput.value);
+        const note = noteInput.value || 'Vinayaka Chaturthi Donation';
 
-    if (!amount || amount <= 0) {
-        alert('Please enter a valid amount');
-        return;
-    }
+        if (!amount || amount <= 0) {
+          alert('Please enter a valid amount');
+          return;
+        }
 
-    // Correct UPI ID (change this to your real one)
-    const upiId = '7993962018@ybl';  
-    const merchantName = 'Kings Youth';
+        const upiId = '7993962018@ybl';
+        const merchantName = 'Kings Youth';
 
-    // Generate UPI link
-    const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
+        const upiLink = `upi://pay?pa=${upiId}&pn=${encodeURIComponent(merchantName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(note)}`;
 
-    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        window.location.href = upiLink; // Direct open
-    } else {
-        alert('UPI payments work best on mobile. Please scan the QR code.');
-    }
+        if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+          window.location.href = upiLink;
+        } else {
+          alert('UPI payments work best on mobile. Please scan the QR code.');
+        }
 
-    amountInput.value = '';
-    noteInput.value = '';
-}
+        amountInput.value = '';
+        noteInput.value = '';
+      }
   
       };
 
