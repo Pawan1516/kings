@@ -1,633 +1,455 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Vinayaka Chaturthi Celebrations - Kings Youth</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinayaka Chaturthi 2025 - Kings Youth</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="module" src="firebase.js"></script>
 </head>
-<body class="bg-amber-50">
-  <!-- Loading Spinner -->
-  <div id="loading-spinner" class="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50">
-    <div class="animate-spin rounded-full h-32 w-32 border-b-2 border-amber-600"></div>
-  </div>
-
-  <!-- Main Website -->
-  <div id="main-website">
-    <!-- Floating Donate Button -->
-    <button id="floating-donate-btn" class="floating-btn bg-amber-600 hover:bg-amber-700 text-white rounded-full w-16 h-16 flex items-center justify-center text-2xl shadow-lg">
-      <i class="fas fa-donate"></i>
-    </button>
-
+<body>
     <!-- Navigation -->
-    <nav class="bg-gradient-to-r from-amber-600 to-amber-700 text-white p-4 shadow-lg sticky top-0 z-50">
-      <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between">
-        <div class="flex items-center mb-4 md:mb-0">
-          <i class="fas fa-om text-2xl mr-2"></i>
-          <h1 class="text-2xl font-bold">Kings Youth</h1>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <i class="fas fa-om"></i>
+                <h1>Kings Youth</h1>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link active" data-tab="home">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#donate" class="nav-link" data-tab="donate">
+                    <i class="fas fa-donate"></i> Donate
+                </a>
+                <a href="#schedule" class="nav-link" data-tab="schedule">
+                    <i class="fas fa-calendar"></i> Schedule
+                </a>
+                <a href="#gallery" class="nav-link" data-tab="gallery">
+                    <i class="fas fa-images"></i> Gallery
+                </a>
+                <a href="#location" class="nav-link" data-tab="location">
+                    <i class="fas fa-map-marker-alt"></i> Location
+                </a>
+                <a href="#admin" class="nav-link" data-tab="admin">
+                    <i class="fas fa-lock"></i> Admin
+                </a>
+            </div>
         </div>
-        <div class="flex flex-wrap justify-center gap-6">
-          <a href="#" class="nav-link active-tab font-medium hover:text-amber-200 transition" data-tab="home">
-            <i class="fas fa-home mr-1"></i> Home
-          </a>
-          <a href="#" class="nav-link font-medium hover:text-amber-200 transition" data-tab="pooja-schedule">
-            <i class="fas fa-calendar-alt mr-1"></i> Schedule
-          </a>
-          <a href="#" class="nav-link font-medium hover:text-amber-200 transition" data-tab="donation">
-            <i class="fas fa-donate mr-1"></i> Donate
-          </a>
-          <a href="#" class="nav-link font-medium hover:text-amber-200 transition" data-tab="gallery">
-            <i class="fas fa-images mr-1"></i> Gallery
-          </a>
-          <a href="#" class="nav-link font-medium hover:text-amber-200 transition" data-tab="location">
-            <i class="fas fa-map-marker-alt mr-1"></i> Location
-          </a>
-          <a href="#" class="nav-link font-medium hover:text-amber-200 transition" data-tab="admin">
-            <i class="fas fa-lock mr-1"></i> Admin
-          </a>
-          <a href="#" id="upi-payment-link" class="nav-link font-medium hover:text-amber-200 transition bg-green-600 px-3 py-1 rounded">
-            <i class="fas fa-mobile-alt mr-1"></i> UPI Pay
-          </a>
-        </div>
-      </div>
     </nav>
 
-    <!-- Home Tab -->
-    <section id="home-tab" class="content-tab p-6 max-w-6xl mx-auto fade-in">
-      <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
-        <div class="md:flex">
-          <div class="md:flex-shrink-0">
-            <div class="h-full w-full md:w-80 bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center">
-              <i class="fas fa-om text-8xl text-white opacity-50"></i>
+    <!-- Home Section -->
+    <section id="home" class="tab-content active">
+        <div class="container">
+            <!-- Hero Section -->
+            <div class="hero-card">
+                <div class="hero-image">
+                    <i class="fas fa-om"></i>
+                </div>
+                <div class="hero-content">
+                    <span class="hero-subtitle">Celebration</span>
+                    <h1>Welcome to Vinayaka Chaturthi 2025</h1>
+                    <p>Join us in celebrating the birth of Lord Ganesha with devotion, joy, and community spirit. 
+                       The festival begins on <strong>August 27, 2025</strong> and continues for 10 days of prayers, 
+                       rituals, and cultural programs.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="switchTab('schedule')">
+                            Learn More <i class="fas fa-arrow-right"></i>
+                        </button>
+                        <button class="btn btn-success" onclick="switchTab('donate')">
+                            <i class="fas fa-heart"></i> Quick Donate
+                        </button>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="p-8">
-            <div class="uppercase tracking-wide text-sm text-amber-600 font-semibold mb-1">Celebration</div>
-            <h1 class="text-3xl font-bold text-gray-900 mb-3">Welcome to Vinayaka Chaturthi 2025</h1>
-            <p class="mt-2 text-gray-600">
-              Join us in celebrating the birth of Lord Ganesha with devotion, joy, and community spirit. 
-              The festival begins on <span class="font-semibold">August 27, 2025</span> and continues for 
-              10 days of prayers, rituals, and cultural programs.
-            </p>
-            <div class="mt-4">
-              <button id="learn-more-btn" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition">
-                Learn More <i class="fas fa-chevron-right ml-1"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Countdown -->
-      <div class="bg-gradient-to-r from-amber-500 to-amber-600 text-white rounded-xl p-6 shadow-lg mb-8">
-        <h2 class="text-2xl font-bold mb-4 text-center">Countdown to Vinayaka Chaturthi</h2>
-        <div class="flex justify-center gap-4">
-          <div class="countdown-item rounded-lg p-3 text-center w-20">
-            <div id="countdown-days" class="text-3xl font-bold">00</div>
-            <div class="text-sm">Days</div>
-          </div>
-          <div class="countdown-item rounded-lg p-3 text-center w-20">
-            <div id="countdown-hours" class="text-3xl font-bold">00</div>
-            <div class="text-sm">Hours</div>
-          </div>
-          <div class="countdown-item rounded-lg p-3 text-center w-20">
-            <div id="countdown-minutes" class="text-3xl font-bold">00</div>
-            <div class="text-sm">Minutes</div>
-          </div>
-          <div class="countdown-item rounded-lg p-3 text-center w-20">
-            <div id="countdown-seconds" class="text-3xl font-bold">00</div>
-            <div class="text-sm">Seconds</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Today's Pooja -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-        <h2 class="text-xl font-bold text-amber-700 mb-4 flex items-center">
-          <i class="fas fa-calendar-day mr-2"></i> Today's Pooja Schedule
-        </h2>
-        <div id="home-pooja-list" class="space-y-3">
-          <div class="text-gray-500 text-center py-4">Loading today's schedule...</div>
-        </div>
-      </div>
-
-      <!-- Festival Highlights -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-        <h2 class="text-xl font-bold text-amber-700 mb-4">Festival Highlights</h2>
-        <div class="grid md:grid-cols-3 gap-4">
-          <div class="bg-amber-50 rounded-lg p-4 border border-amber-100">
-            <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-praying-hands"></i></div>
-            <h3 class="font-bold text-amber-700 mb-1">Ganesh Pooja</h3>
-            <p class="text-gray-600 text-sm">Daily prayers and rituals performed with devotion</p>
-          </div>
-          <div class="bg-amber-50 rounded-lg p-4 border border-amber-100">
-            <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-utensils"></i></div>
-            <h3 class="font-bold text-amber-700 mb-1">Prasadam</h3>
-            <p class="text-gray-600 text-sm">Delicious offerings distributed to devotees</p>
-          </div>
-          <div class="bg-amber-50 rounded-lg p-4 border border-amber-100">
-            <div class="text-amber-600 text-2xl mb-2"><i class="fas fa-music"></i></div>
-            <h3 class="font-bold text-amber-700 mb-1">Cultural Programs</h3>
-            <p class="text-gray-600 text-sm">Music, dance and devotional performances</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Event Location -->
-      <div class="bg-white rounded-xl shadow-md p-6 mb-8">
-        <h2 class="text-xl font-bold text-amber-700 mb-4 flex items-center">
-          <i class="fas fa-map-marker-alt mr-2"></i> Event Location
-        </h2>
-        <div class="grid md:grid-cols-2 gap-6">
-          <div>
-            <h3 class="font-semibold text-amber-600 mb-2">Kings Youth Community Center</h3>
-            <div class="space-y-2 text-gray-600">
-              <div class="flex items-center">
-                <i class="fas fa-map-marker-alt text-amber-600 mr-2"></i>
-                <span>123 Temple Street, Community District</span>
-              </div>
-              <div class="flex items-center">
-                <i class="fas fa-phone text-amber-600 mr-2"></i>
-                <span>+91 98765 43210</span>
-              </div>
-              <div class="flex items-center">
-                <i class="fas fa-clock text-amber-600 mr-2"></i>
-                <span>Open daily: 6:00 AM - 10:00 PM</span>
-              </div>
+            <!-- Countdown -->
+            <div class="countdown-card">
+                <h2>Countdown to Vinayaka Chaturthi</h2>
+                <div class="countdown-container">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
             </div>
-            <div class="mt-4 flex flex-wrap gap-3">
-              <button id="get-directions-btn" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition">
-                <i class="fas fa-directions mr-1"></i> Get Directions
-              </button>
-              <button id="view-full-map-btn" class="bg-amber-100 hover:bg-amber-200 text-amber-800 px-4 py-2 rounded-lg transition">
-                <i class="fas fa-expand mr-1"></i> View Full Map
-              </button>
-              <button id="quick-donate-home" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition">
-                <i class="fas fa-donate mr-1"></i> Quick Donate
-              </button>
+
+            <!-- Festival Highlights -->
+            <div class="highlights-card">
+                <h2>Festival Highlights</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-item">
+                        <i class="fas fa-praying-hands"></i>
+                        <h3>Ganesh Pooja</h3>
+                        <p>Daily prayers and rituals performed with devotion</p>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-utensils"></i>
+                        <h3>Prasadam</h3>
+                        <p>Delicious offerings distributed to devotees</p>
+                    </div>
+                    <div class="highlight-item">
+                        <i class="fas fa-music"></i>
+                        <h3>Cultural Programs</h3>
+                        <p>Music, dance and devotional performances</p>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="bg-gray-100 rounded-lg overflow-hidden">
-            <div id="home-map" class="w-full h-48 bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center">
-              <div class="text-center text-amber-700">
-                <i class="fas fa-map text-4xl mb-2"></i>
-                <p>Click "View Full Map" to see location</p>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- Pooja Schedule Tab -->
-    <section id="pooja-schedule-tab" class="content-tab hidden p-6 max-w-6xl mx-auto fade-in">
-      <div class="bg-white rounded-xl shadow-md p-6">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold text-amber-700 flex items-center">
-            <i class="fas fa-calendar-alt mr-2"></i> Pooja Schedule
-          </h2>
-          <span id="pooja-edit-btn" class="hidden cursor-pointer text-amber-600 hover:text-amber-800 transition">
-            <i class="fas fa-edit mr-1"></i> Edit Schedule
-          </span>
-        </div>
-        
-        <div class="relative">
-          <ul id="pooja-schedule-list" class="space-y-4 pl-4">
-            <div class="text-gray-500 text-center py-4">Loading schedule...</div>
-          </ul>
-        </div>
+    <!-- Donation Section -->
+    <section id="donate" class="tab-content">
+        <div class="container">
+            <div class="donate-card">
+                <h2><i class="fas fa-heart"></i> Support the Festival</h2>
+                
+                <!-- Quick Amounts -->
+                <div class="donation-section">
+                    <h3>Quick Donation Amounts</h3>
+                    <div class="quick-amounts">
+                        <div class="amount-card" data-amount="51">
+                            <div class="amount">₹51</div>
+                            <div class="label">Blessing</div>
+                        </div>
+                        <div class="amount-card" data-amount="101">
+                            <div class="amount">₹101</div>
+                            <div class="label">Devotion</div>
+                        </div>
+                        <div class="amount-card" data-amount="501">
+                            <div class="amount">₹501</div>
+                            <div class="label">Prosperity</div>
+                        </div>
+                        <div class="amount-card" data-amount="1001">
+                            <div class="amount">₹1001</div>
+                            <div class="label">Blessings</div>
+                        </div>
+                    </div>
+                </div>
 
-        <div id="pooja-edit-section" class="hidden mt-6">
-          <textarea id="pooja-schedule-textarea" class="w-full h-40 border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-amber-500 focus:border-amber-500" placeholder="Enter pooja schedule (one per line)"></textarea>
-          <div class="mt-4 flex justify-end gap-3">
-            <button id="pooja-cancel-btn" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition">
-              Cancel
-            </button>
-            <button id="pooja-save-btn" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition">
-              Save Changes
-            </button>
-          </div>
+                <!-- Custom Amount -->
+                <div class="donation-section">
+                    <h3>Custom Amount</h3>
+                    <div class="custom-amount">
+                        <input type="number" id="customAmount" placeholder="Enter amount" min="1">
+                        <button class="btn btn-primary" onclick="setCustomAmount()">Set Amount</button>
+                    </div>
+                </div>
+
+                <!-- Donor Details -->
+                <div class="donation-section">
+                    <h3>Donor Information (Optional)</h3>
+                    <div class="donor-form">
+                        <input type="text" id="donorName" placeholder="Your name">
+                        <input type="tel" id="donorPhone" placeholder="Your phone number">
+                    </div>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="donation-section">
+                    <h3>Payment Method</h3>
+                    <div class="payment-methods">
+                        <!-- UPI Payment -->
+                        <div class="payment-method active" id="upiMethod">
+                            <h4><i class="fas fa-mobile-alt"></i> UPI Payment</h4>
+                            <div class="payment-content">
+                                <div class="upi-details">
+                                    <p><strong>UPI ID:</strong> <span id="upiId">7993962018@paytm</span>
+                                    <button class="btn-copy" onclick="copyUPI()"><i class="fas fa-copy"></i></button></p>
+                                    <p><strong>Amount:</strong> <span id="selectedAmount">₹0</span></p>
+                                </div>
+                                <div class="qr-container" id="qrContainer">
+                                    <div class="qr-placeholder">
+                                        <i class="fas fa-qrcode"></i>
+                                        <p>Select amount to generate QR code</p>
+                                    </div>
+                                </div>
+                                <div class="payment-buttons">
+                                    <button class="btn btn-success" onclick="openUPIApp()" id="upiAppBtn" disabled>
+                                        <i class="fas fa-mobile-alt"></i> Open UPI App
+                                    </button>
+                                    <button class="btn btn-primary" onclick="confirmPayment()" id="confirmBtn" disabled>
+                                        <i class="fas fa-check"></i> I have completed payment
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Donation Stats (Admin Only) -->
+                <div class="donation-section" id="donationStats" style="display: none;">
+                    <h3>Donation Summary</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card donation">
+                            <div class="stat-label">Total Donations</div>
+                            <div class="stat-value" id="totalDonations">₹0</div>
+                        </div>
+                        <div class="stat-card expense">
+                            <div class="stat-label">Total Expenses</div>
+                            <div class="stat-value" id="totalExpenses">₹0</div>
+                        </div>
+                        <div class="stat-card balance">
+                            <div class="stat-label">Available Balance</div>
+                            <div class="stat-value" id="netBalance">₹0</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </section>
 
-    <!-- Donation Tab -->
-    <section id="donation-tab" class="content-tab hidden p-6 max-w-6xl mx-auto fade-in">
-      <div class="bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-2xl font-bold text-amber-700 mb-6 flex items-center">
-          <i class="fas fa-donate mr-2"></i> Support the Festival
-        </h2>
-
-        <!-- Donation Summary (Admin Only) -->
-        <div id="donation-status-section" class="hidden mb-8">
-          <h3 class="text-xl font-semibold mb-4 text-amber-600 border-b border-amber-100 pb-2">Donation Summary</h3>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div class="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
-              <div class="text-sm text-green-700 mb-1">Total Donations</div>
-              <div id="donation-total" class="text-3xl font-bold text-green-700">₹0</div>
+    <!-- Schedule Section -->
+    <section id="schedule" class="tab-content">
+        <div class="container">
+            <div class="schedule-card">
+                <h2><i class="fas fa-calendar"></i> Pooja Schedule</h2>
+                <div class="schedule-list" id="scheduleList">
+                    <div class="schedule-item">
+                        <div class="schedule-time">6:00 AM</div>
+                        <div class="schedule-event">Mangal Aarti</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">8:00 AM</div>
+                        <div class="schedule-event">Abhishek</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">12:00 PM</div>
+                        <div class="schedule-event">Madhyanha Aarti</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">6:00 PM</div>
+                        <div class="schedule-event">Sandhya Aarti</div>
+                    </div>
+                    <div class="schedule-item">
+                        <div class="schedule-time">8:00 PM</div>
+                        <div class="schedule-event">Shayan Aarti</div>
+                    </div>
+                </div>
             </div>
-            <div class="bg-red-50 border border-red-200 rounded-lg p-4 text-center">
-              <div class="text-sm text-red-700 mb-1">Total Expenses</div>
-              <div id="expense-total" class="text-3xl font-bold text-red-700">₹0</div>
-            </div>
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
-              <div class="text-sm text-blue-700 mb-1">Available Balance</div>
-              <div id="net-balance" class="text-3xl font-bold text-blue-700">₹0</div>
-            </div>
-          </div>
-          
-          <!-- Add Donation/Expense Forms (Admin Only) -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h4 class="text-lg font-semibold mb-3 text-green-700">Add Donation</h4>
-              <form id="add-donation-form">
-                <input type="text" id="donation-name" placeholder="Donor Name" class="w-full mb-2 p-2 border rounded" required>
-                <input type="number" id="donation-amount" placeholder="Amount (₹)" class="w-full mb-2 p-2 border rounded" required>
-                <textarea id="donation-note" placeholder="Note (optional)" class="w-full mb-2 p-2 border rounded h-16"></textarea>
-                <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded">Add Donation</button>
-              </form>
-            </div>
-            
-            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-              <h4 class="text-lg font-semibold mb-3 text-red-700">Add Expense</h4>
-              <form id="add-expense-form">
-                <input type="text" id="expense-description" placeholder="Expense Description" class="w-full mb-2 p-2 border rounded" required>
-                <input type="number" id="expense-amount" placeholder="Amount (₹)" class="w-full mb-2 p-2 border rounded" required>
-                <textarea id="expense-note" placeholder="Note (optional)" class="w-full mb-2 p-2 border rounded h-16"></textarea>
-                <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-2 rounded">Add Expense</button>
-              </form>
-            </div>
-          </div>
-          
-          <div id="donation-history-section">
-            <h4 class="text-lg font-semibold mb-3 text-gray-800 flex items-center">
-              <i class="fas fa-history mr-2"></i> Recent Transactions
-            </h4>
-            <div class="bg-gray-50 rounded-lg border border-gray-200 p-3 max-h-64 overflow-y-auto scrollbar-hide">
-              <div id="donation-history-list">Loading transaction history...</div>
-            </div>
-          </div>
         </div>
-
-        <!-- Public Donation Form -->
-        <div id="public-donation-section">
-          <div class="bg-gradient-to-r from-amber-100 to-amber-200 rounded-lg p-6 mb-6">
-            <h3 class="text-xl font-semibold mb-4 text-amber-800">Make a Donation</h3>
-            <p class="text-amber-700 mb-4">Your contribution helps us organize a beautiful celebration for Lord Ganesha</p>
-            
-            <div class="flex flex-col sm:flex-row gap-4">
-              <div class="flex-1">
-                <input type="number" id="public-donation-amount" placeholder="Enter amount (₹)" class="w-full p-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
-              </div>
-              <div class="flex-1">
-                <input type="text" id="public-donor-name" placeholder="Your name (optional)" class="w-full p-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500">
-              </div>
-              <div class="flex gap-2">
-                <button id="donate-btn" class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold transition whitespace-nowrap">
-                  <i class="fas fa-heart mr-2"></i> Donate Now
-                </button>
-                <button id="upi-pay-btn" class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition whitespace-nowrap">
-                  <i class="fas fa-mobile-alt mr-2"></i> UPI Pay
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Quick Donation Buttons -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
-            <button class="quick-donate-btn bg-amber-100 hover:bg-amber-200 text-amber-800 py-3 rounded-lg font-semibold transition" data-amount="101">₹101</button>
-            <button class="quick-donate-btn bg-amber-100 hover:bg-amber-200 text-amber-800 py-3 rounded-lg font-semibold transition" data-amount="501">₹501</button>
-            <button class="quick-donate-btn bg-amber-100 hover:bg-amber-200 text-amber-800 py-3 rounded-lg font-semibold transition" data-amount="1001">₹1001</button>
-            <button class="quick-donate-btn bg-amber-100 hover:bg-amber-200 text-amber-800 py-3 rounded-lg font-semibold transition" data-amount="2001">₹2001</button>
-          </div>
-
-          <!-- UPI Details -->
-          <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-            <h4 class="text-lg font-semibold mb-3 text-green-700 flex items-center">
-              <i class="fas fa-mobile-alt mr-2"></i> UPI Payment Details
-            </h4>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <p class="text-sm text-green-600 mb-1">UPI ID:</p>
-                <p class="font-mono text-green-800 font-semibold">7993962018@ybl</p>
-              </div>
-              <div>
-                <p class="text-sm text-green-600 mb-1">Merchant Name:</p>
-                <p class="text-green-800 font-semibold">Kings Youth</p>
-              </div>
-            </div>
-            <p class="text-sm text-green-600 mt-3">
-              <i class="fas fa-info-circle mr-1"></i>
-              Use the UPI Pay button above for automatic payment setup, or use these details for manual transfer.
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
 
-    <!-- Gallery Tab -->
-    <section id="gallery-tab" class="content-tab hidden p-6 max-w-6xl mx-auto fade-in">
-      <div class="bg-white rounded-xl shadow-md p-6">
-        <div class="flex justify-between items-center mb-6">
-          <h2 class="text-2xl font-bold text-amber-700 flex items-center">
-            <i class="fas fa-images mr-2"></i> Photo Gallery
-          </h2>
-          <button id="gallery-upload-btn" class="hidden bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition">
-            <i class="fas fa-upload mr-2"></i> Upload Images
-          </button>
-        </div>
+    <!-- Gallery Section -->
+    <section id="gallery" class="tab-content">
+        <div class="container">
+            <div class="gallery-card">
+                <h2><i class="fas fa-images"></i> Festival Gallery</h2>
+                
+                <!-- Gallery Filters -->
+                <div class="gallery-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="deity">Deity</button>
+                    <button class="filter-btn" data-filter="ceremony">Ceremony</button>
+                    <button class="filter-btn" data-filter="decorations">Decorations</button>
+                    <button class="filter-btn" data-filter="offerings">Offerings</button>
+                </div>
 
-        <!-- Gallery Filters -->
-        <div class="mb-6 flex flex-wrap gap-2">
-          <button class="gallery-filter-btn active bg-amber-100 hover:bg-amber-200 text-amber-800 px-4 py-2 rounded-lg transition" data-category="all">
-            All Images
-          </button>
-          <button class="gallery-filter-btn bg-amber-100 hover:bg-amber-200 text-amber-800 px-4 py-2 rounded-lg transition" data-category="current">
-            Current Year
-          </button>
-          <button class="gallery-filter-btn bg-amber-100 hover:bg-amber-200 text-amber-800 px-4 py-2 rounded-lg transition" data-category="previous">
-            Previous Years
-          </button>
-          <button class="gallery-filter-btn bg-amber-100 hover:bg-amber-200 text-amber-800 px-4 py-2 rounded-lg transition" data-category="rituals">
-            Rituals
-          </button>
-        </div>
+                <!-- Gallery Grid -->
+                <div class="gallery-grid" id="galleryGrid">
+                    <!-- Images will be loaded dynamically -->
+                </div>
 
-        <!-- Gallery Grid -->
-        <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          <div class="text-gray-500 text-center py-8 col-span-full">Loading gallery...</div>
-        </div>
+                <!-- Admin Gallery Management -->
+                <div id="galleryManagement" class="gallery-management" style="display: none;">
+                    <div class="management-header">
+                        <h4><i class="fas fa-upload"></i> Upload New Images</h4>
+                        <button class="btn btn-secondary" onclick="closeGalleryManager()">
+                            <i class="fas fa-times"></i> Close
+                        </button>
+                    </div>
 
-        <!-- Upload Form (Admin Only) -->
-        <div id="gallery-upload-form" class="hidden mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
-          <h4 class="text-lg font-semibold mb-3 text-amber-700">Upload New Images</h4>
-          
-          <!-- Drag and Drop Upload Area -->
-          <div id="upload-area" class="upload-area">
-            <i class="fas fa-cloud-upload-alt text-4xl text-amber-600 mb-4"></i>
-            <p class="text-amber-700 font-medium mb-2">Drag and drop images here</p>
-            <p class="text-amber-600 text-sm mb-4">or click to select files</p>
-            <input type="file" id="image-files" accept="image/*" multiple class="hidden">
-            <button type="button" id="select-files-btn" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition">
-              Select Images
-            </button>
-          </div>
+                    <form id="imageUploadForm" class="add-image-form" onsubmit="uploadGalleryImage(event)">
+                        <h5>Add New Image</h5>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="imageTitle">Title</label>
+                                <input type="text" id="imageTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="imageCategory">Category</label>
+                                <select id="imageCategory" required>
+                                    <option value="">Select category</option>
+                                    <option value="deity">Deity</option>
+                                    <option value="ceremony">Ceremony</option>
+                                    <option value="decorations">Decorations</option>
+                                    <option value="offerings">Offerings</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageDescription">Description</label>
+                            <textarea id="imageDescription" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageFile">Image File</label>
+                            <input type="file" id="imageFile" accept="image/*" required>
+                        </div>
+                        
+                        <div id="imagePreview" class="image-preview" style="display: none;">
+                            <img id="previewImg" style="max-width: 200px; max-height: 200px; border-radius: 8px;">
+                        </div>
 
-          <!-- Image Previews -->
-          <div id="image-previews" class="image-preview-container"></div>
+                        <div id="uploadProgress" class="upload-progress" style="display: none;">
+                            <div class="progress-bar">
+                                <div id="progressFill" class="progress-fill"></div>
+                            </div>
+                            <p id="progressText">Uploading...</p>
+                        </div>
 
-          <!-- Upload Form -->
-          <form id="image-upload-form" class="mt-4">
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <input type="text" id="image-title" placeholder="Image Title" class="w-full mb-2 p-2 border rounded" required>
-                <select id="image-category" class="w-full mb-2 p-2 border rounded" required>
-                  <option value="">Select Category</option>
-                  <option value="current">Current Year</option>
-                  <option value="previous">Previous Years</option>
-                  <option value="rituals">Rituals</option>
-                </select>
-              </div>
-              <div>
-                <textarea id="image-description" placeholder="Description (optional)" class="w-full mb-2 p-2 border rounded h-20"></textarea>
-              </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-upload"></i> Upload Image
+                        </button>
+                    </form>
+
+                    <div class="existing-images">
+                        <h5>Existing Images</h5>
+                        <div id="adminImagesGrid" class="admin-images-grid">
+                            <!-- Admin images will be loaded here -->
+                        </div>
+                    </div>
+                </div>
             </div>
-            
-            <!-- Upload Progress -->
-            <div id="upload-progress" class="hidden mt-4">
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-sm text-gray-600">Uploading images...</span>
-                <span id="upload-percentage" class="text-sm font-medium text-amber-600">0%</span>
-              </div>
-              <div class="progress-bar">
-                <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
-              </div>
-            </div>
-
-            <div class="flex justify-end gap-3 mt-4">
-              <button type="button" id="cancel-upload" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded">Cancel</button>
-              <button type="submit" id="upload-submit-btn" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded" disabled>
-                <i class="fas fa-upload mr-2"></i>Upload Images
-              </button>
-            </div>
-          </form>
         </div>
-      </div>
     </section>
 
-    <!-- Location Tab -->
-    <section id="location-tab" class="content-tab hidden p-6 max-w-6xl mx-auto fade-in">
-      <div class="bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-2xl font-bold text-amber-700 mb-6 flex items-center">
-          <i class="fas fa-map-marker-alt mr-2"></i> Event Location
-        </h2>
-
-        <div class="grid lg:grid-cols-2 gap-8">
-          <!-- Location Details -->
-          <div>
-            <h3 class="text-xl font-semibold text-amber-600 mb-4">Kings Youth Community Center</h3>
-            
-            <div class="space-y-4 mb-6">
-              <div class="flex items-start">
-                <i class="fas fa-map-marker-alt text-amber-600 mr-3 mt-1"></i>
-                <div>
-                  <p class="font-medium text-gray-800">Address</p>
-                  <p class="text-gray-600">123 Temple Street, Community District<br>Near Central Park, City Center</p>
+    <!-- Location Section -->
+    <section id="location" class="tab-content">
+        <div class="container">
+            <div class="location-card">
+                <h2><i class="fas fa-map-marker-alt"></i> Event Location</h2>
+                <div class="location-content">
+                    <div class="location-info">
+                        <h3>Kings Youth Community Center</h3>
+                        <div class="location-details">
+                            <div class="detail-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>123 Temple Street, Community District</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-phone"></i>
+                                <span>+91 98765 43210</span>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-clock"></i>
+                                <span>Open daily: 6:00 AM - 10:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="location-buttons">
+                            <button class="btn btn-primary" onclick="openGoogleMaps()">
+                                <i class="fas fa-directions"></i> Get Directions
+                            </button>
+                            <button class="btn btn-success" onclick="switchTab('donate')">
+                                <i class="fas fa-donate"></i> Quick Donate
+                            </button>
+                        </div>
+                    </div>
+                    <div class="location-map">
+                        <div class="map-placeholder">
+                            <i class="fas fa-map"></i>
+                            <p>Click "Get Directions" to view location on Google Maps</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              
-              <div class="flex items-start">
-                <i class="fas fa-phone text-amber-600 mr-3 mt-1"></i>
-                <div>
-                  <p class="font-medium text-gray-800">Contact</p>
-                  <p class="text-gray-600">+91 98765 43210</p>
-                  <button id="call-venue" class="text-amber-600 hover:text-amber-800 text-sm">
-                    <i class="fas fa-phone-alt mr-1"></i> Call Now
-                  </button>
-                </div>
-              </div>
-              
-              <div class="flex items-start">
-                <i class="fas fa-clock text-amber-600 mr-3 mt-1"></i>
-                <div>
-                  <p class="font-medium text-gray-800">Festival Hours</p>
-                  <p class="text-gray-600">Daily: 6:00 AM - 10:00 PM<br>Special Programs: As announced</p>
-                </div>
-              </div>
             </div>
-
-            <!-- Action Buttons -->
-            <div class="grid grid-cols-2 gap-4">
-              <button id="open-google-maps" class="bg-amber-600 hover:bg-amber-700 text-white py-3 px-4 rounded-lg transition">
-                <i class="fas fa-directions mr-2"></i> Get Directions
-              </button>
-              <button id="share-location" class="bg-amber-100 hover:bg-amber-200 text-amber-800 py-3 px-4 rounded-lg transition">
-                <i class="fas fa-share mr-2"></i> Share Location
-              </button>
-            </div>
-
-            <!-- Transportation -->
-            <div class="mt-6 bg-amber-50 border border-amber-200 rounded-lg p-4">
-              <h4 class="font-semibold text-amber-700 mb-3">Transportation Options</h4>
-              <div class="space-y-2 text-sm">
-                <div class="flex items-center">
-                  <i class="fas fa-bus text-amber-600 mr-2"></i>
-                  <span>Bus Routes: 15, 23, 45 (Central Park Stop)</span>
-                </div>
-                <div class="flex items-center">
-                  <i class="fas fa-train text-amber-600 mr-2"></i>
-                  <span>Metro: Blue Line - Community Center Station (5 min walk)</span>
-                </div>
-                <div class="flex items-center">
-                  <i class="fas fa-car text-amber-600 mr-2"></i>
-                  <span>Parking: Available on premises (Free during festival)</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Map Placeholder -->
-          <div class="bg-gray-100 rounded-lg overflow-hidden">
-            <div class="w-full h-96 bg-gradient-to-br from-amber-100 to-amber-200 flex items-center justify-center">
-              <div class="text-center text-amber-700">
-                <i class="fas fa-map text-6xl mb-4"></i>
-                <h3 class="text-xl font-semibold mb-2">Interactive Map</h3>
-                <p class="mb-4">Click "Get Directions" to open in Google Maps</p>
-                <button class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-lg transition">
-                  View in Google Maps
-                </button>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
     </section>
 
-    <!-- Admin Tab -->
-    <section id="admin-tab" class="content-tab hidden p-6 max-w-6xl mx-auto fade-in">
-      <div class="bg-white rounded-xl shadow-md p-6">
-        <h2 class="text-2xl font-bold text-amber-700 mb-6 flex items-center">
-          <i class="fas fa-lock mr-2"></i> Admin Panel
-        </h2>
+    <!-- Admin Section -->
+    <section id="admin" class="tab-content">
+        <div class="container">
+            <div class="admin-card">
+                <!-- Login Form -->
+                <div id="adminLogin">
+                    <h2><i class="fas fa-lock"></i> Admin Login</h2>
+                    <form id="loginForm" onsubmit="adminLogin(event)">
+                        <div class="form-group">
+                            <label for="adminUsername">Username</label>
+                            <input type="text" id="adminUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adminPassword">Password</label>
+                            <input type="password" id="adminPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                        <div id="loginError" class="error-message" style="display: none;"></div>
+                    </form>
+                </div>
 
-        <!-- Admin Login Form -->
-        <div id="admin-login-form" class="max-w-md mx-auto">
-          <div class="bg-amber-50 border border-amber-200 rounded-lg p-6">
-            <h3 class="text-lg font-semibold text-amber-700 mb-4">Admin Login</h3>
-            <form id="login-form">
-              <div class="mb-4">
-                <input type="text" id="admin-username" placeholder="Username" class="w-full p-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" required>
-              </div>
-              <div class="mb-4">
-                <input type="password" id="admin-password" placeholder="Password" class="w-full p-3 border border-amber-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500" required>
-              </div>
-              <button type="submit" class="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-semibold transition">
-                <i class="fas fa-sign-in-alt mr-2"></i> Login
-              </button>
-            </form>
-            <div id="login-error" class="hidden mt-3 text-red-600 text-sm"></div>
-            <div class="mt-4 text-xs text-gray-500 text-center">
-              Default credentials: admin / ganesha123
+                <!-- Admin Dashboard -->
+                <div id="adminDashboard" style="display: none;">
+                    <div class="dashboard-header">
+                        <h2><i class="fas fa-tachometer-alt"></i> Admin Dashboard</h2>
+                        <button class="btn btn-secondary" onclick="adminLogout()">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+
+                    <div class="admin-actions">
+                        <button class="btn btn-primary" onclick="openGalleryManager()">
+                            <i class="fas fa-images"></i> Manage Gallery
+                        </button>
+                        <button class="btn btn-success" onclick="addDonation()">
+                            <i class="fas fa-plus"></i> Add Donation
+                        </button>
+                        <button class="btn btn-warning" onclick="addExpense()">
+                            <i class="fas fa-minus"></i> Add Expense
+                        </button>
+                        <button class="btn btn-info" onclick="syncWithFirebase()">
+                            <i class="fas fa-sync"></i> Sync Data
+                        </button>
+                    </div>
+
+                    <div id="adminStats" class="admin-stats">
+                        <h3>Statistics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <div class="stat-label">Total Donations</div>
+                                <div class="stat-value" id="adminTotalDonations">₹0</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Total Expenses</div>
+                                <div class="stat-value" id="adminTotalExpenses">₹0</div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-label">Gallery Images</div>
+                                <div class="stat-value" id="adminTotalImages">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-
-        <!-- Admin Dashboard -->
-        <div id="admin-dashboard" class="hidden">
-          <div class="flex justify-between items-center mb-6">
-            <h3 class="text-xl font-semibold text-amber-600">Welcome, Admin!</h3>
-            <button id="admin-logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition">
-              <i class="fas fa-sign-out-alt mr-2"></i> Logout
-            </button>
-          </div>
-
-          <div class="grid md:grid-cols-3 gap-6">
-            <!-- Quick Stats -->
-            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h4 class="font-semibold text-blue-700 mb-2">Website Stats</h4>
-              <div class="space-y-1 text-sm text-blue-600">
-                <div>Gallery Images: <span id="stats-images">0</span></div>
-                <div>Total Donations: <span id="stats-donations">₹0</span></div>
-                <div>Active Schedule Items: <span id="stats-schedule">0</span></div>
-              </div>
-            </div>
-
-            <!-- Recent Activity -->
-            <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
-              <h4 class="font-semibold text-purple-700 mb-2">Recent Activity</h4>
-              <div id="recent-activity" class="space-y-1 text-sm text-purple-600">
-                <div>Loading...</div>
-              </div>
-            </div>
-
-            <!-- Quick Actions -->
-            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h4 class="font-semibold text-green-700 mb-2">Quick Actions</h4>
-              <div class="space-y-2">
-                <button class="w-full text-left text-sm text-green-600 hover:text-green-800 py-1" onclick="switchTab('pooja-schedule')">
-                  <i class="fas fa-edit mr-1"></i> Edit Schedule
-                </button>
-                <button class="w-full text-left text-sm text-green-600 hover:text-green-800 py-1" onclick="switchTab('gallery')">
-                  <i class="fas fa-upload mr-1"></i> Upload Images
-                </button>
-                <button class="w-full text-left text-sm text-green-600 hover:text-green-800 py-1" onclick="switchTab('donation')">
-                  <i class="fas fa-chart-bar mr-1"></i> View Donations
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Admin Tools -->
-          <div class="mt-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
-            <h4 class="text-lg font-semibold text-gray-700 mb-4">Admin Tools</h4>
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <h5 class="font-medium text-gray-600 mb-2">Content Management</h5>
-                <ul class="space-y-1 text-sm text-gray-500">
-                  <li>• Edit pooja schedules in Schedule tab</li>
-                  <li>• Upload gallery images with Firebase Storage</li>
-                  <li>• Manage donations and expenses</li>
-                </ul>
-              </div>
-              <div>
-                <h5 class="font-medium text-gray-600 mb-2">Data Management</h5>
-                <ul class="space-y-1 text-sm text-gray-500">
-                  <li>• Real-time Firebase Firestore sync</li>
-                  <li>• Cloud image storage and management</li>
-                  <li>• Transaction history and reports</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </section>
-  </div>
 
-  <!-- Image Modal -->
-  <div id="image-modal" class="modal">
-    <span class="close">&times;</span>
-    <div class="modal-content">
-      <img id="modal-image" src="" alt="" style="width: 100%; max-height: 80vh; object-fit: contain;">
-      <div class="bg-white p-4 rounded-b-lg">
-        <h3 id="modal-title" class="text-xl font-bold text-gray-800 mb-2"></h3>
-        <p id="modal-description" class="text-gray-600"></p>
-        <p id="modal-category" class="text-sm text-amber-600 mt-2"></p>
-      </div>
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" style="width: 100%; border-radius: 8px;">
+            <div id="modalCaption" style="text-align: center; color: white; padding: 1rem;"></div>
+        </div>
     </div>
-  </div>
 
-  <!-- Notification Container -->
-  <div id="notification-container" class="fixed top-4 right-4 z-50 space-y-2"></div>
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
 
-  <!-- Firebase SDK and Configuration -->
-  <script type="module" src="firebase.js"></script>
-  <!-- Main Application Script -->
-  <script src="index.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
