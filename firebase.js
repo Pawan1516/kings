@@ -5,15 +5,15 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 // Firebase Configuration - Replace with your actual config
 const firebaseConfig = {
-  apiKey: "AIzaSyCJUtkYO1HwzjkIb_A0k1tTSAymdsie-rI",
-  authDomain: "balaji-5a803.firebaseapp.com",
-  projectId: "balaji-5a803",
-  storageBucket: "balaji-5a803.appspot.com",
-  messagingSenderId: "453221155673",
-  appId: "1:453221155673:web:60178468c7500d3720c248",
-  measurementId: "G-FSX5EPG5XN"
+  apiKey: "AIzaSyD8gX8-HleDASGiCW83-sMt7prRwbePto8",
+  authDomain: "ganesh-donations.firebaseapp.com",
+  databaseURL: "https://ganesh-donations-default-rtdb.firebaseio.com",
+  projectId: "ganesh-donations",
+  storageBucket: "ganesh-donations.firebasestorage.app",
+  messagingSenderId: "685028500807",
+  appId: "1:685028500807:web:7b8c4878edf8a1e57e5862",
+  measurementId: "G-7DD2HWVG8C"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);

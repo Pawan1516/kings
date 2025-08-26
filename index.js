@@ -413,7 +413,15 @@ const firebaseConfig = {
         db.collection("settings").doc("pooja_schedule").get().then(doc => {
           adminPoojaTextarea.value = (doc.exists && Array.isArray(doc.data().list) ? doc.data().list : defaultSchedule).join("\n");
         });
-      } else {
+      } else if (username && password) {
+        isAdmin = false;
+        loginError.classList.add("hidden");
+        loginSection.classList.add("hidden");
+        adminControls.classList.add("hidden");
+        // Redirect to home page after successful login for regular users
+        document.querySelector('[data-tab="home"]').click();
+      
+      }else {
         loginError.classList.remove("hidden");
       }
     });
@@ -425,6 +433,7 @@ const firebaseConfig = {
       document.getElementById("pooja-edit-btn").classList.add("hidden");
       document.getElementById("username").value = "";
       document.getElementById("password").value = "";
+      document.querySelector('[data-tab="admin"]').click();
     });
 
     // Admin: Image Upload
